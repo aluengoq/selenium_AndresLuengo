@@ -2,16 +2,18 @@ package Clase11;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Test;
 
-import static Clase9.Ejercicio9.getDriver;
 
 public class spotifyWithCssSelectorTest {
 
     @Test
     public void spotifyByPlaceHolderTest() {
-        WebDriver driver = getDriver("https://www.spotify.com/uy/signup/");
+        System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://www.spotify.com/uy/signup/");
 
         driver.findElement(By.cssSelector("input[placeholder='Introduce tu correo electrónico.']")).sendKeys("testuser@test.com");
         driver.findElement(By.cssSelector("input[placeholder='Vuelve a introducir tu correo electrónico.']")).sendKeys("testuser@test.com");
