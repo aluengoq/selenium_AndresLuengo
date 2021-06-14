@@ -1,0 +1,7 @@
+<suite name="Modelo Prueba">
+    <test name="Tests Prueba">
+        <classes>
+            <class name="ModeloPrueba.prueba_mailchimp"/>
+        </classes>
+    </test>
+</suite>
