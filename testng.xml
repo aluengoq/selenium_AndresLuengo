@@ -1,0 +1,8 @@
+<suite name="Prueba">
+    <parameter name="specificTag" value="h2"/>
+    <test name="Tests Prueba">
+        <classes>
+            <class name="Prueba.PruebaNetflixTest"/>
+        </classes>
+    </test>
+</suite>
