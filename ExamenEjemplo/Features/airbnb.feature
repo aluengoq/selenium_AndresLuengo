@@ -11,9 +11,9 @@ Feature: Airbnb Test
 
     Examples:
       | location                         | place     | numberOfMatches |
-      | New York, NY                     | New York  | 16              |
-     # | Abu Dhabi - United Arab Emirates | Abu Dhabi | 15              |
-      #| Oslo, Norway                     | Oslo      | 14              |
+      | New York, NY                     | New York  | 15              |
+      | Abu Dhabi - United Arab Emirates | Abu Dhabi | 15              |
+      | Oslo, Norway                     | Oslo      | 14              |
 
   Scenario Outline: Search for experiences in <location>
     Given the user is at the homepage
@@ -25,6 +25,10 @@ Feature: Airbnb Test
 
     Examples:
       | location                         | numberOfResults | place     |
-      | New York, NY                     | 28              | New York  |
-      #| Abu Dhabi - United Arab Emirates |                 | Abu Dhabi |
-      #| Oslo, Norway                     |                 | Oslo      |
+      | New York, NY                     | 182             | New York  |
+      | Abu Dhabi - United Arab Emirates | 9               | Abu Dhabi |
+      | Oslo, Norway                     | 6               | Oslo      |
+
+  Scenario: Check nearby places
+    Given the user is at the homepage
+    Then the user should see the list of nearby places and how many hours away they are

@@ -1,6 +1,5 @@
 package ExamenEjemplo.Pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -17,29 +16,14 @@ public class ResultsPage extends BasePage {
     List<WebElement> twoGuestsList;
 
     @FindBy(tagName = "h1")
-    List<WebElement> h1List;
+    WebElement h1;
 
     public int getTwoGuestListSize() throws InterruptedException {
-        Thread.sleep(7000);
+        Thread.sleep(3000);
         return twoGuestsList.size();
     }
 
-    public boolean isPlaceDisplayed(String place) {
-        boolean foundPlace = false;
-//        try {
-            for (WebElement h1 : h1List) {
-                if (h1.getText().contains(place)) {
-                    foundPlace = true;
-                    break;
-                }
-            }
-//        } catch (Exception exception) {
-//
-//        }
-        return foundPlace;
-    }
-
-    public int getMatchingExperienceListSize(String place) {
-        return driver.findElements(By.xpath(String.format("//*[containts(text(),'%s)]", place))).size();
+    public String getH1Text() {
+        return h1.getText();
     }
 }

@@ -7,6 +7,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class Homepage extends BasePage {
@@ -35,6 +37,12 @@ public class Homepage extends BasePage {
 
     @FindBy(xpath = "//input[@placeholder='Where are you going?']")
     WebElement locationPlaceholder;
+
+    @FindBy(css = "._1slbw8s span._1i13tcg span:nth-child(1)")
+    List<WebElement> nearbyPlacesList;
+
+    @FindBy(css = "._1slbw8s span._1i13tcg span:nth-child(2)")
+    List<WebElement> driveHoursList;
 
     public void open() {
         System.setProperty("webdriver.chrome.driver", "drivers/chromedriver");
@@ -85,7 +93,25 @@ public class Homepage extends BasePage {
         return locationPlaceholder.getAttribute("value");
     }
 
-   /* public boolean isSectionSelected(String section) {
-        return driver.findElement(By.xpath(String.format("//button[@data-testid='header-tab-search-block-tab-true-%s']", section))).isSelected();
-    }*/
+    public boolean isSectionSelected(String section) throws InterruptedException {
+        Thread.sleep(3000);
+        boolean isSelected = false;
+        String selected = driver.findElement(By.xpath(String.format("//button[@data-testid='header-tab-search-block-tab-true-%s']", section))).getAttribute("aria-selected");
+        if (selected.equals("true")) {
+            isSelected = true;
+        }
+        return  isSelected;
+    }
+
+    public void printNumberOfNearbyPlaces() {
+        System.out.println("There's a total of " + nearbyPlacesList.size() + " places nearby");
+    }
+
+    public void printNearbyPlacesAndHoursDrive() {
+        int cont = 0;
+        for(WebElement nearbyPlace : nearbyPlacesList) {
+            System.out.println("---> Place: " + nearbyPlace.getText() + " at " + driveHoursList.get(cont).getText());
+            cont++;
+        }
+    }
 }
