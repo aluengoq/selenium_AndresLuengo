@@ -38,10 +38,10 @@ public class Homepage extends BasePage {
     @FindBy(xpath = "//input[@placeholder='Where are you going?']")
     WebElement locationPlaceholder;
 
-    @FindBy(css = "._1slbw8s span._1i13tcg span:nth-child(1)")
+    @FindBy(tagName = "b")
     List<WebElement> nearbyPlacesList;
 
-    @FindBy(css = "._1slbw8s span._1i13tcg span:nth-child(2)")
+    @FindBy(xpath = "//span[@class= '_pihus2'][contains(text(), 'drive')]")
     List<WebElement> driveHoursList;
 
     public void open() {

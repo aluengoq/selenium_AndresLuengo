@@ -6,13 +6,12 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.hamcrest.MatcherAssert;
-import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 
 import static org.hamcrest.core.IsEqual.equalTo;
 
-public class AirbnbSteps {
+public class AirbnbSteps extends BaseTest{
 
-    public WebDriver driver;
     public Homepage homepage = new Homepage(driver);
     public ResultsPage resultsPage;
 
@@ -51,7 +50,7 @@ public class AirbnbSteps {
     @Given("the user goes to {string} section")
     public void user_goes_to_section(String section) throws InterruptedException {
         homepage.clickOnSection(section);
-        MatcherAssert.assertThat("This is not the Experiences section",homepage.isSectionSelected(section), equalTo(true));
+        Assert.assertTrue(homepage.isSectionSelected(section), "This is not the Experiences section");
     }
 
     @When("selects {string} as date")
@@ -68,16 +67,16 @@ public class AirbnbSteps {
 
     @Then("the user should see the title Stays in {string} and {int} matches with the number of guests in the results")
     public void validate_results_match_with_search_criteria(String place, int numberOfMatches) throws InterruptedException {
-        MatcherAssert.assertThat("Place is not being displayed", resultsPage.getH1Text().contains(place), equalTo(true));
-        MatcherAssert.assertThat("Number of results don't match", resultsPage.getTwoGuestListSize(), equalTo(numberOfMatches));
+        Assert.assertTrue(resultsPage.getH1Text().contains(place), "Place is not being displayed");
+        Assert.assertEquals(resultsPage.getTwoGuestListSize(), numberOfMatches, "Number of results don't match");
         homepage.closeBrowser();
     }
 
     @Then("the user should see {int} results for {string}")
     public void user_should_see_the_results_for(int numberOfResults, String place) throws InterruptedException {
         Thread.sleep(3000);
-        MatcherAssert.assertThat("This is not the experiences result page for " + place, resultsPage.getPageTitle().contains(place), equalTo(true));
-        MatcherAssert.assertThat("Number of results do not match!", resultsPage.getH1Text().contains(numberOfResults + " experiences"), equalTo(true));
+        Assert.assertTrue(resultsPage.getPageTitle().contains(place), "This not the experiences result page for " + place);
+        Assert.assertTrue(resultsPage.getH1Text().contains(numberOfResults + " experiences"), "Number of results do not match");
         homepage.closeBrowser();
     }
 }
