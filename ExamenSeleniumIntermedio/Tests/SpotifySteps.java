@@ -7,7 +7,7 @@ import ExamenSeleniumIntermedio.Pages.TermsAndConditionsPage;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.junit.Assert;
+import org.testng.Assert;
 
 public class SpotifySteps extends BaseTest {
 
@@ -29,13 +29,13 @@ public class SpotifySteps extends BaseTest {
     @Then("the user to see the {string} plan displayed")
     public void user_to_see_the_plan_displayed(String planName) throws InterruptedException {
         Thread.sleep(3000);
-        Assert.assertTrue("This is not the Premium page", premiumPage.getPageTitle().contains("Premium"));
-        Assert.assertTrue("Plan is not available", premiumPage.isPlanDisplayed(planName));
+        Assert.assertTrue(premiumPage.getPageTitle().contains("Premium"), "This is not the Premium page");
+        Assert.assertTrue(premiumPage.isPlanDisplayed(planName), "Plan is not available");
     }
 
     @Then("the user gets to Spotify Registration Page")
     public void user_gets_to_spotify_registration_page()  {
-        Assert.assertTrue("This is not the Registration page", signupPage.getPageTitle().contains("Registrarte"));
+        Assert.assertTrue(signupPage.getPageTitle().contains("Registrarte"), "This is not the Registration page");
     }
 
     @When("the user completes the email field with {string}")
@@ -50,7 +50,7 @@ public class SpotifySteps extends BaseTest {
 
     @Then("the user should see the {string} message displayed")
     public void user_should_see_the_message_displayed(String errorMsg) {
-        Assert.assertTrue(errorMsg + " error message is not displayed", signupPage.isErrorMsgDisplayed(errorMsg));
+        Assert.assertTrue(signupPage.isErrorMsgDisplayed(errorMsg), errorMsg + " error message is not displayed");
     }
 
     @When("the user navigates to {string}")
@@ -60,7 +60,7 @@ public class SpotifySteps extends BaseTest {
 
     @Then("the user should see the {string} displayed")
     public void user_should_see_the_link_name_displayed(String linkName) {
-        Assert.assertTrue("This is not the Terms and Conditions page", termsAndConditionsPage.getPageTitle().contains("Términos y Condiciones"));
-        Assert.assertTrue(linkName + " is not present", termsAndConditionsPage.isLinkDisplayed(linkName));
+        Assert.assertTrue(termsAndConditionsPage.getPageTitle().contains("Términos y Condiciones"), "This is not the Terms and Conditions page");
+        Assert.assertTrue(termsAndConditionsPage.isLinkDisplayed(linkName), linkName + " is not present");
     }
 }
